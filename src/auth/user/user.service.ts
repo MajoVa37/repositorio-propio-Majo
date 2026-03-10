@@ -3,17 +3,17 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { User } from '../entities/user.entity';
-import { RoleService }
+import { RoleServices } from '../role/role.service';
 
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
-
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
+        private readonly roleService: RoleServices,
     ) {}
 
     findAll() {
@@ -45,5 +45,9 @@ export class UserService {
         });
 
         return this.userRepository.save(newUser);
+    }
+
+    findById(id: number) {
+        return this.userRepository.findOneBy({ id });
     }
 }

@@ -25,4 +25,16 @@ export class RoleServices {
         }
         return null;
     }
+
+    findAll() {
+        return this.roleRepository.find();
+    }
+
+    findByName(name: string) {
+        return this.roleRepository.findOneBy({ name });
+    }
+
+    findById(id: number) {
+        return this.roleRepository.findOneBy({ id });
+    }
 }
